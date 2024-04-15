@@ -8,8 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-# It's a good practice to keep secret keys outside the source code.
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'jhagsdJGS&khasdjhkGSD')
 
 @app.route('/')
 def index():
@@ -37,5 +35,7 @@ def get_transcript():
         flash('Failed to fetch transcript. Please check the URL and try again.', 'error')
         return redirect(url_for('index'))
 
+# This block ensures the server runs only if the script is executed directly
 if __name__ == '__main__':
-    app.run(debug=os.getenv('FLASK_DEBUG', False))
+    # Configures the server to be accessible externally and run on port 5000
+    app.run(host='0.0.0.0', port=5555, debug=os.getenv('FLASK_DEBUG', False))
