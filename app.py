@@ -38,4 +38,4 @@ def get_transcript():
 # This block ensures the server runs only if the script is executed directly
 if __name__ == '__main__':
     # Configures the server to be accessible externally and run on port 5000
-    app.run(host='0.0.0.0', port=5555, debug=os.getenv('FLASK_DEBUG', False))
+    app.run(host='0.0.0.0', port=5000, debug=os.getenv('FLASK_DEBUG', False))
