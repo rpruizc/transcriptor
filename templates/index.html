@@ -166,12 +166,32 @@
               </div>
             </div>
           </div>
-      
+
           <main class="py-10 bg-white">
-            <div id="transcriptText" class="px-4 sm:px-6 lg:px-8 text-gray-700 font-sans">
+            <div class="flex flex-wrap -mx-2">
+              <!-- Single Column for Analysis -->
+              <div class="w-full px-2">
+                <div class="text-gray-700 font-sans">
+                  {{ analysis|safe }}
+                </div>
+                <button id="toggleTranscript" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                  Show Transcript
+                </button>
+              </div>
+            </div>
+            <!-- Hidden Div for Transcript -->
+            <div id="transcriptDiv" class="hidden relative mt-4 p-4 border rounded shadow-lg">
+              <button id="closeTranscript" class="absolute top-0 right-0 mt-2 mr-2 text-gray-700 hover:text-gray-900">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <div id="transcriptText" class="text-gray-700 font-sans">
                 {{ transcript|safe }}
+              </div>
             </div>
           </main>
+
         </div>
     </div>
     <script>
@@ -209,6 +229,24 @@
           });
         });
       </script>
-                  
+      <script>
+        document.getElementById('toggleTranscript').addEventListener('click', function() {
+          var transcriptDiv = document.getElementById('transcriptDiv');
+          transcriptDiv.classList.toggle('hidden');
+          // Update the button text based on visibility
+          if (transcriptDiv.classList.contains('hidden')) {
+            this.textContent = 'Show Transcript';
+          } else {
+            this.textContent = 'Hide Transcript';
+          }
+        });
+
+        document.getElementById('closeTranscript').addEventListener('click', function() {
+          var transcriptDiv = document.getElementById('transcriptDiv');
+          transcriptDiv.classList.add('hidden');
+          // Ensure the toggle button text is reset to 'Show Transcript'
+          document.getElementById('toggleTranscript').textContent = 'Show Transcript';
+        });
+      </script>                  
 </body>
 </html>
